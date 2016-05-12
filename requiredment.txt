@@ -1,0 +1,16 @@
+appnope==0.1.0
+backports.shutil-get-terminal-size==1.0.0
+decorator==4.0.9
+Django==1.9.4
+gnureadline==6.3.3
+ipython==4.2.0
+ipython-genutils==0.1.0
+MySQL-python==1.2.5
+pathlib2==2.1.0
+pexpect==4.0.1
+pickleshare==0.7.2
+ptyprocess==0.5.1
+simplegeneric==0.8.1
+six==1.10.0
+traitlets==4.2.1
+wheel==0.24.0
