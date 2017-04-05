@@ -1,3 +1,4 @@
+# coding: utf-8
 """
 Django settings for rbac project.
 
@@ -43,6 +44,8 @@ INSTALLED_APPS += [
 ]
 
 MIDDLEWARE_CLASSES = [
+    # 登录检查中间件
+    'rbac.auth.AuthMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
