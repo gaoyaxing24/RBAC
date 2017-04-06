@@ -1,0 +1,31 @@
+{% include "public/header.html" %}
+
+    <div class="modal-header">
+        <h4>用户列表</h4>
+        <a type="button" class="btn btn-default navbar-right" href="{% url 'staff_add' %}"> 添加用户</a>
+    </div>
+
+    <div class="modal-body">
+        <table class="table table-condensed table-hover">
+            <tr>
+                <th>id</th>
+                <th>姓名</th>
+                <th>邮箱</th>
+                <th>是否管理员</th>
+                <th>创建时间</th>
+                <td>操作</td>
+            </tr>
+            {% for user in users %}
+             <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{% if user.is_admin == 1 %}是{% else %}否{% endif %}</td>
+                <td>{{ user.created_time }}</td>
+                <td><a href="{% url 'staff_edit' %}?uid={{ user.id }}">编辑</a></td>
+             </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% include "public/footer.html" %}
