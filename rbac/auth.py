@@ -11,6 +11,8 @@ class AuthMiddleware(object):
                    "after": [u'/logout', u'/vlogout', u'/', '/forbidden']
                   }
 
+    # __allow_url["before"] += [u'/staff/list', '/role/list', '/access/list',]
+
     def process_request(self, request):
         """决定调用哪个视图以前"""
         pass
@@ -67,9 +69,9 @@ class AuthMiddleware(object):
     def __is_super(self, request):
         """查看是否超级用户(管理员)"""
         result = False
-        if 'iss' in request.COOKIES and request.COOKIES['iss'] == 1:
+        if 'iss' in request.COOKIES.keys() and request.COOKIES['iss'] == '1':
             result = True
-        return False
+        return result
 
 
     def __is_login(self, request):

@@ -23,7 +23,7 @@ def login(request):
         user = None
 
     if user:
-        res = HttpResponse
+        res = HttpResponseRedirect("/")
         res.set_cookie('uid', uid)
         if user.is_admin:
             res.set_cookie('iss', 1)
