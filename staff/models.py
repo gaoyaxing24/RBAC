@@ -16,9 +16,9 @@ class User(models.Model):
     # 状态 0->无效   1->有效
     status = models.SmallIntegerField(default=1)
     # 最后一次更新时间
-    updated_time = models.DateTimeField(default=datetime.now())
+    updated_time = models.DateTimeField(auto_now_add=True)
     # 创建时间
-    created_time = models.DateTimeField(default=datetime.now())
+    created_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "用户->%s" % self.name
@@ -31,9 +31,9 @@ class Role(models.Model):
     # 状态 0->无效   1->有效
     status = models.SmallIntegerField(default=1)
     # 最后一次更新时间
-    updated_time = models.DateTimeField(default=datetime.now())
+    updated_time = models.DateTimeField(auto_now_add=True)
     # 创建时间
-    created_time = models.DateTimeField(default=datetime.now())
+    created_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "角色->%s" % self.name
@@ -46,7 +46,7 @@ class UserRole(models.Model):
     # 角色ID
     role_id = models.IntegerField()
     # 创建时间
-    created_time = models.DateTimeField(default=datetime.now())
+    created_time = models.DateTimeField(auto_now_add=True)
 
 
 
@@ -59,9 +59,9 @@ class Access(models.Model):
     # 状态 0->无效, 1->有效
     status = models.SmallIntegerField(default=1)
     # 最后一次更新时间
-    updated_time = models.DateTimeField(default=datetime.now())
+    updated_time = models.DateTimeField(auto_now_add=True)
     # 创建时间
-    created_time = models.DateTimeField(default=datetime.now())
+    created_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "权限->%s" % self.title
@@ -74,7 +74,7 @@ class RoleAccess(models.Model):
     # 权限ID
     access_id = models.IntegerField()
     # 创建时间
-    created_time = models.DateTimeField(default=datetime.now())
+    created_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "角色权限->%s" % self.id
