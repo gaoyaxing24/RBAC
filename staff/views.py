@@ -51,4 +51,23 @@ def role_edit(request):
     return render(request, "staff/roleEdit.html", {"role": role})
 
 
+def access_list(request):
+    """权限列表"""
+    accesses = Access.objects.all()
+    return render(request, "staff/accessList.html", {'accesses': accesses})
+
+
+def access_add(request):
+    """权限添加 页面"""
+    return render(request, "staff/accessAdd.html")
+
+
+def access_edit(request):
+    """权限编辑 页面"""
+    aid = request.GET.get('aid')
+    try:
+        access = Access.objects.get(id=aid)
+    except Exception:
+        access = None
+    return render(request, "staff/accessEdit.html", {"access": access})
 
