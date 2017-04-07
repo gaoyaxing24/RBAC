@@ -1,7 +1,7 @@
 # coding: utf-8
 from __future__ import unicode_literals
 from django.shortcuts import render
-from staff.models import User
+from staff.models import User, Role, Access
 from django.http import HttpResponse
 
 
@@ -27,3 +27,28 @@ def user_edit(request):
     uid = request.GET['uid']
     user = User.objects.get(id=uid)
     return render(request, 'staff/staffEdit.html', {'user': user})
+
+
+def role_list(request):
+    """角色列表 页面"""
+    roles = Role.objects.all()
+    return render(request, "staff/roleList.html", {"roles": roles})
+
+
+def role_add(request):
+    """角色添加 页面"""
+    return render(request, 'staff/roleAdd.html')
+
+
+def role_edit(request):
+    """角色编辑 页面"""
+    rid = request.GET.get('rid')
+    try:
+        role = Role.objects.get(id=rid)
+    except Exception:
+        role = None
+
+    return render(request, "staff/roleEdit.html", {"role": role})
+
+
+

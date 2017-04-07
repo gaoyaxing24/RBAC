@@ -1,0 +1,29 @@
+{% include "public/header.html" %}
+
+    <div class="modal-header">
+        <h4>编辑角色</h4>
+    </div>
+
+    <div class="modal-body">
+        <form class="form-horizontal" action="{% url 'role_edit_act' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="rid" value="{{ role.id }}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">名称</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="name" value="{{ role.name }}" placeholder="角色名称">
+                </div>
+                <span class="help-block" for="name">* 角色名称</span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset2 col-sm-10">
+                    <button type="submit" class="btn btn-success">保存</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+{% include "public/footer.html" %}

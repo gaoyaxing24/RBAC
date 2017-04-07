@@ -11,7 +11,7 @@ import json
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from staff.models import User, UserRole, Access, RoleAccess
+from staff.models import User, Role, UserRole, Access, RoleAccess
 
 
 def login(request):
@@ -76,3 +76,28 @@ def user_edit(request):
 
     return HttpResponseRedirect(reverse('staff_list'))
 
+
+def role_add(request):
+    """角色添加 编辑"""
+    name = request.POST.get('name', '').strip()
+    role = Role.objects.create(name=name, status=1)
+    try:
+        role.save()
+    except Exception:
+        pass
+    return HttpResponseRedirect(reverse("role_list"))
+
+
+def role_edit(request):
+    """角色编辑 编辑"""
+    rid = request.POST.get('rid')
+    name = request.POST.get('name')
+    try:
+        role = Role.objects.get(id=rid)
+    except Exception:
+        role = None
+
+    if role:
+        role.name = name
+        role.save()
+    return HttpResponseRedirect(reverse('role_list'))
