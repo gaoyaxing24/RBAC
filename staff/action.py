@@ -78,7 +78,7 @@ def user_edit(request):
 
 
 def role_add(request):
-    """角色添加 编辑"""
+    """角色添加 操作"""
     name = request.POST.get('name', '').strip()
     role = Role.objects.create(name=name, status=1)
     try:
@@ -89,7 +89,7 @@ def role_add(request):
 
 
 def role_edit(request):
-    """角色编辑 编辑"""
+    """角色编辑 操作"""
     rid = request.POST.get('rid')
     name = request.POST.get('name')
     try:
@@ -101,3 +101,36 @@ def role_edit(request):
         role.name = name
         role.save()
     return HttpResponseRedirect(reverse('role_list'))
+
+
+def access_add(request):
+    """权限添加 操作"""
+    title = request.POST.get('title', '').strip()
+    urls = request.POST.get('urls', '').strip()
+
+    access = Access.objects.create(title=title, urls=urls, status=1)
+    try:
+        access.save()
+    except Exception:
+        pass
+    return HttpResponseRedirect(reverse('access_list'))
+
+
+def access_edit(request):
+    """权限编辑 操作"""
+    aid = request.POST.get('aid')
+    title = request.POST.get('title', '').strip()
+    urls = request.POST.get('urls', '').strip()
+
+    try:
+        access = Access.objects.get(id=aid)
+    except Exception:
+        access = None
+
+    if access:
+        access.title = title
+        access.urls = urls
+        access.save()
+
+    return HttpResponseRedirect(reverse('access_list'))
+

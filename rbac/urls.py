@@ -68,6 +68,13 @@ urlpatterns = [
 
     # ------------ 权限 -------------------
     # 权限列表
-    # 权限添加
-    # 权限编辑
+    url(r'^access/list$', staff_view.access_list, name='access_list'),
+    # 权限添加 页面
+    url(r'^access/add$', staff_view.access_add, name='access_add'),
+    # 权限添加 编辑
+    url(r'^access/add/action$', staff_action.access_add, name='access_add_act'),
+    # 权限编辑 页面
+    url(r'^access/edit$', staff_view.access_edit, name='access_edit'),
+    # 权限编辑 编辑
+    url(r'^access/edit/action$', staff_action.access_edit, name='access_edit_act'),
 ]
