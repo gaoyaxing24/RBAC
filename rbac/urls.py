@@ -45,11 +45,26 @@ urlpatterns = [
     url(r'^staff/edit$', staff_view.user_edit, name='staff_edit'),
     # 用户编辑  操作
     url(r'^staff/edit/action$', staff_action.user_edit, name='staff_edit_act'),
+    # 设置用户角色 页面
+
+    # 设置用户角色 操作
 
     # ------------ 角色 -------------------
-    # 角色列表
-    # 角色添加
-    # 角色编辑
+    # 角色列表 页面
+    url(r'^role/list$', staff_view.role_list, name='role_list'),
+    # 角色添加 页面
+    url(r'^role/add$', staff_view.role_add, name='role_add'),
+    # 角色添加 操作
+    url(r'^role/add/action$', staff_action.role_add, name='role_add_act'),
+    # 角色编辑 页面
+    url(r'^role/edit$', staff_view.role_edit, name='role_edit'),
+    # 角色编辑 编辑
+    url(r'^role/edit/action$', staff_action.role_edit, name='role_edit_act'),
+
+    # 设置角色权限 页面
+
+    # 设置角色权限 操作
+
 
     # ------------ 权限 -------------------
     # 权限列表
