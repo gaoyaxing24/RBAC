@@ -134,3 +134,47 @@ def access_edit(request):
 
     return HttpResponseRedirect(reverse('access_list'))
 
+
+def set_role(request):
+    """设置角色 操作
+    1.取出表单中的uid及表单中提交上来的设置角色列表
+    2. 获取到所有的角色
+    3. 如果根本此uid和rid获取到了此角色且在roles列表中, 则保留, 否则删除
+    4. 如果未根本uid和rid取到到此角色此在roles列表中, 则新建, 否则pass
+    """
+    uid = request.POST['uid']
+    roles = request.POST.getlist('roles')
+    all_rid = [str(role.id) for role in Role.objects.all()]
+    for rid in all_rid:
+        try:
+           user_role = UserRole.objects.get(uid=uid, role_id=rid)
+        except Exception:
+            if rid in roles:
+                user_role = UserRole()
+                user_role.uid = uid
+                user_role.role_id = rid
+                user_role.save()
+        else:
+            if rid not in roles:
+                user_role.delete()
+    return HttpResponseRedirect(reverse('staff_list'))
+
+
+def set_access(request):
+    """设置权限 操作"""
+    rid = request.POST['rid']
+    accesses = request.POST.getlist('accesses')
+    all_aid = [str(access.id) for access in Access.objects.all()]
+    for aid in all_aid:
+        try:
+            role_access = RoleAccess.objects.get(role_id=rid, access_id=aid)
+        except Exception:
+            if aid in accesses:
+                role_access = RoleAccess()
+                role_access.role_id = rid
+                role_access.access_id = aid
+                role_access.save()
+        else:
+            if aid not in accesses:
+                role_access.delete()
+    return HttpResponseRedirect(reverse('role_list'))
