@@ -21,8 +21,12 @@
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
                 <td>{% if user.is_admin == 1 %}是{% else %}否{% endif %}</td>
-                <td>{{ user.created_time }}</td>
-                <td><a href="{% url 'staff_edit' %}?uid={{ user.id }}">编辑</a></td>
+                <td>{{ user.created_time | date:"y-m-d H:m:s" }}</td>
+                <td>
+                    <a href="{% url 'staff_edit' %}?uid={{ user.id }}">编辑</a>
+{#                    <a href="{% url 'set_role' %}"?uid="{{ user.id }}">设置角色</a>#}
+                    <a href="{% url 'set_role' %}?uid={{ user.id }}">设置角色</a>
+                </td>
              </tr>
             {% endfor %}
         </table>

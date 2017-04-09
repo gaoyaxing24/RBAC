@@ -21,6 +21,7 @@
                 <td>
                     <a href="{% url "role_edit" %}?rid={{ role.id }}">编辑</a>
                     <a href="javascript:void(0);">删除</a>
+                    <a href="{% url 'set_access' %}?rid={{ role.id }}">设置权限</a>
                 </td>
             </tr>
             {% endfor %}
