@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from django.shortcuts import render
 from staff.models import User, Role, Access
+from staff.models import UserRole, RoleAccess
 from django.http import HttpResponse
 
 
@@ -71,3 +72,42 @@ def access_edit(request):
         access = None
     return render(request, "staff/accessEdit.html", {"access": access})
 
+
+def set_role(request):
+    """设置角色 页面"""
+    uid = request.GET['uid']
+    try:
+        user = User.objects.get(id=uid)
+    except Exception:
+        user = None
+
+    roles = Role.objects.all()
+    for role in roles:
+        try:
+            _has_ur = UserRole.objects.get(uid=uid, role_id=role.id)
+        except Exception:
+            pass
+        else:
+            role.is_role = '1'
+
+    return render(request, 'staff/setRole.html', {'user': user, 'roles': roles})
+
+
+def set_access(request):
+    """设置权限 页面"""
+    rid = request.GET['rid']
+    try:
+        role = Role.objects.get(id=rid)
+    except Exception:
+        role = None
+
+    accesses = Access.objects.all()
+    for access in accesses:
+        try:
+            _has_ra = RoleAccess.objects.get(role_id=rid, access_id=access.id)
+        except Exception:
+            pass
+        else:
+            access.has_pre = '1'
+
+    return render(request, 'staff/setAccess.html', {'role': role, 'accesses': accesses})
