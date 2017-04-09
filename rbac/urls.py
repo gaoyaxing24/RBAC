@@ -46,8 +46,9 @@ urlpatterns = [
     # 用户编辑  操作
     url(r'^staff/edit/action$', staff_action.user_edit, name='staff_edit_act'),
     # 设置用户角色 页面
-
+    url(r'^set/role$', staff_view.set_role, name='set_role'),
     # 设置用户角色 操作
+    url(r'^set/role/action$', staff_action.set_role, name='set_role_act'),
 
     # ------------ 角色 -------------------
     # 角色列表 页面
@@ -60,10 +61,10 @@ urlpatterns = [
     url(r'^role/edit$', staff_view.role_edit, name='role_edit'),
     # 角色编辑 编辑
     url(r'^role/edit/action$', staff_action.role_edit, name='role_edit_act'),
-
     # 设置角色权限 页面
-
+    url(r'^set/access$', staff_view.set_access, name='set_access'),
     # 设置角色权限 操作
+    url(r'^set/access/action$', staff_action.set_access, name='set_access_act'),
 
 
     # ------------ 权限 -------------------
