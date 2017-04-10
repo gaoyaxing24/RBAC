@@ -1,0 +1,35 @@
+{% include "public/header.html" %}
+
+    <div class="modal-header">
+        <h4>编辑权限</h4>
+    </div>
+
+    <div class="modal-body">
+        <form class="form-horizontal" method="post" action="{% url 'access_edit_act' %}">
+            {% csrf_token %}
+            <input type="hidden" name='aid' value="{{ access.id }}">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">名称</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" name="title" placeholder="权限名称" value="{{ access.title }}">
+                </div>
+                <span class="help-block">* 权限名称</span>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">URL</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" name="urls" placeholder="URL" value="{{ access.urls }}">
+                </div>
+                <span class="help-block">* URLS</span>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">保 存</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% include "public/footer.html" %}

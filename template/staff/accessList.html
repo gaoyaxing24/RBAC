@@ -1,0 +1,32 @@
+{% include "public/header.html" %}
+
+    <div class="modal-header">
+        <h4>权限列表</h4>
+        <a type="button" class="btn btn-default navbar-right" href="{% url 'access_add' %}"> 添加权限</a>
+    </div>
+
+    <div class="modal-body">
+        <table class="table table-condensed table-hover">
+            <tr>
+                <th>权限ID</th>
+                <td>权限名称</td>
+                <td>URL</td>
+                <td>状态</td>
+                <td>操作</td>
+            </tr>
+            {% for access in accesses %}
+            <tr>
+                <td>{{ access.id }}</td>
+                <td><a href="{{ access.urls }}">{{ access.title }}</a></td>
+                <td>{{ access.urls }}</td>
+                <td>{% if access.status == 1 %}生效{% else %}无效{% endif %}</td>
+                <td>
+                    <a href="{% url 'access_edit' %}?aid={{ access.id }}">编辑</a>
+                    <a href="javascript:void(0);">删除</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% include "public/footer.html" %}

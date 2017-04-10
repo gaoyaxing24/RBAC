@@ -1,0 +1,31 @@
+{% include "public/header.html" %}
+
+    <div class="modal-header">
+        <h4>角色列表</h4>
+        <a type="button" class="btn btn-default navbar-right" href="{% url "role_add" %}">添加角色</a>
+    </div>
+
+    <div class="modal-body">
+        <table class="table table-condensed table-hover">
+            <tr>
+                <th>角色ID</th>
+                <th>角色名称</th>
+                <th>角色状态</th>
+                <th>操作</th>
+            </tr>
+            {% for role in roles %}
+            <tr>
+                <td>{{ role.id }}</td>
+                <td>{{ role.name }}</td>
+                <td>{% if role.status == 1%}有效{% else %}无效{% endif %}</td>
+                <td>
+                    <a href="{% url "role_edit" %}?rid={{ role.id }}">编辑</a>
+                    <a href="javascript:void(0);">删除</a>
+                    <a href="{% url 'set_access' %}?rid={{ role.id }}">设置权限</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+{% include "public/footer.html" %}
